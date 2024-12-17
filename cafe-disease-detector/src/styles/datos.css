@@ -1,0 +1,116 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* Fondo claro */
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Contenedor Principal */
+  #data-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  #data-container h2 {
+    color: #15803d; /* Verde principal */
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  
+  /* Selector de Usuario */
+  #user-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #d1d5db; /* Gris claro */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #374151; /* Gris oscuro */
+    transition: border-color 0.3s ease;
+  }
+  
+  #user-select:focus {
+    outline: none;
+    border-color: #10b981; /* Verde brillante */
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  }
+  
+  /* Tabla de Datos */
+  #data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  #data-table thead {
+    background-color: #16a34a; /* Verde oscuro */
+    color: white;
+  }
+  
+  #data-table th, #data-table td {
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb; /* Gris claro */
+  }
+  
+  #data-table th {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  #data-table td {
+    color: #374151; /* Gris oscuro */
+    text-align: center;
+  }
+  
+  #data-table img {
+    max-width: 100px;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para Filas */
+  #data-table tbody tr:nth-child(even) {
+    background-color: #f9fafb; /* Fondo alternado */
+  }
+  
+  #data-table tbody tr:hover {
+    background-color: #d1fae5; /* Verde muy claro */
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Mensaje de Sin Datos */
+  #data-table tbody tr td[colspan="5"] {
+    font-style: italic;
+    color: #9ca3af; /* Gris claro */
+    text-align: center;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #data-container {
+      padding: 15px;
+    }
+  
+    #data-table img {
+      max-width: 80px;
+    }
+  
+    #data-table th, #data-table td {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+    }
+  }
+  

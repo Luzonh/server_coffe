@@ -1,0 +1,121 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #68986b; /* Fondo claro */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Contenedor principal */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fade-in-down 0.5s ease-in-out;
+}
+
+.login-box h2 {
+  color: #15803d; /* Verde principal */
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.login-box p {
+  margin-bottom: 20px;
+  color: #4b5563; /* Gris claro */
+}
+
+/* Input Fields */
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db; /* Gris claro */
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #10b981; /* Verde más brillante */
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* Buttons */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(to right, #16a34a, #10b981);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background: linear-gradient(to right, #15803d, #059669);
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: scale(0.98);
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #15803d;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.toggle-btn:hover {
+  color: #10b981;
+}
+
+/* Error Message */
+.login-box p[style] {
+  color: #dc2626; /* Rojo para mensajes de error */
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* Animations */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-box h2 {
+    font-size: 1.5rem;
+  }
+}

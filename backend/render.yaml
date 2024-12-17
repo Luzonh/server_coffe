@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: cafe-disease-detector
+    env: node
+    region: ohio
+    buildCommand: |
+      cd APP_WEB/backend
+      npm install
+      pip install -r requirements.txt
+      pip install ultralytics torch torchvision
+    startCommand: cd APP_WEB/backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: FIREBASE_API_KEY
+        sync: false
+      - key: FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_STORAGE_BUCKET
+        sync: false
+      - key: FIREBASE_MESSAGING_SENDER_ID
+        sync: false
+      - key: FIREBASE_APP_ID
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/APP_WEB/backend/model
+      sizeGB: 1
+    healthCheckPath: /test
+    autoDeploy: true

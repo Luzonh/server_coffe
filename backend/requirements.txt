@@ -1,0 +1,8 @@
+ultralytics
+torch
+Pillow
+numpy
+opencv-python-headless
+requests
+python-dotenv
+matplotlib

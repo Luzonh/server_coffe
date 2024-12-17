@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.1.2",
+    "@tensorflow/tfjs-node": "^4.21.0",
+    "axios": "^1.7.7",
+    "browser-image-compression": "^2.0.2",
+    "express": "^4.21.1",
+    "firebase": "^10.13.2",
+    "firebase-admin": "^12.7.0",
+    "lucide-react": "^0.453.0",
+    "multer": "^1.4.5-lts.1",
+    "react-router-dom": "^7.0.2",
+    "sharp": "^0.33.5"
+  },
+  "name": "app_web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}
