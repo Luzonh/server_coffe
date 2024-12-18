@@ -226,7 +226,7 @@ const ResultModal = ({ isOpen, onClose, result }) => {
               <div className="flex justify-center">
                 <div className="relative">
                   <img
-                    src={`http://localhost:3001${result.imagePath}`}
+                    src={`'https://ia-coffee.web.app${result.imagePath}`}
                     alt="Analyzed"
                     className="rounded-lg shadow-lg"
                     style={{ 
@@ -295,7 +295,7 @@ const UploadImage = ({ user }) => {
       const formData = new FormData();
       formData.append('image', selectedFile);
   
-      const response = await fetch('http://localhost:3001/detect', {
+      const response = await fetch('https://ia-coffee.web.app/detect', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
