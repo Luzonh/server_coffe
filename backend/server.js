@@ -10,11 +10,27 @@ const axios = require('axios');
 const downloadModel = require('./modelDownloader');
 
 // Firebase Admin SDK Configuration
-const serviceAccount = require('./model/ia-coffee-firebase-adminsdk-q1d9k-4f2ffeeffc.json');
+try {
+  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT ? 
+  JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT) : 
+  require('./model/ia-coffee-firebase-adminsdk-q1d9k-4f2ffee.json');
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET || 'ia-coffee.appspot.com'
 });
+} catch (error) {
+  console.error('Error al inicializar Firebase Admin:', error);
+  // Si hay un error al cargar el archivo, intentamos usar las variables de entorno
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    admin.initializeApp({
+      credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET || 'ia-coffee.appspot.com'
+    });
+  } else {
+    console.error('No se pudo inicializar Firebase Admin');
+  }
+}
 
 const app = express();
 
