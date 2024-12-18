@@ -2,7 +2,7 @@
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@tensorflow/tfjs-node": "^4.21.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "browser-image-compression": "^2.0.2",
     "express": "^4.21.1",
     "firebase": "^10.13.2",

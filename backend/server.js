@@ -7,6 +7,7 @@ const fs = require('fs');
 const admin = require('firebase-admin');
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
+const downloadModel = require('./modelDownloader');
 
 // Firebase Admin SDK Configuration
 const serviceAccount = require('./model/ia-coffee-firebase-adminsdk-q1d9k-4f2ffeeffc.json');
