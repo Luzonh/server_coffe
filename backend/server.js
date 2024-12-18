@@ -68,6 +68,7 @@ const auth = admin.auth();
 const baseDir = __dirname;
 const uploadsDir = path.join(baseDir, 'uploads');
 const resultsDir = path.join(baseDir, 'results');
+const modelDir = path.join(baseDir, 'model');
 
 // Crear directorios necesarios
 [uploadsDir, resultsDir].forEach(dir => {
@@ -237,6 +238,7 @@ app.post('/detect', cors(), authenticateUser, upload.single('image'), async (req
   }
 
   try {
+    const modelPath = await downloadModel();
     const inputPath = req.file.path;
     const timestamp = Date.now();
 
