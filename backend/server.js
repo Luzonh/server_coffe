@@ -36,11 +36,12 @@ const app = express();
 
 // Configuración CORS
 app.use(cors({
-  origin: '*',
+  origin: ['https://ia-coffee.web.app', 'https://ia-coffee.firebaseapp.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  maxAge: 86400 
 }));
 
 // Headers CORS adicionales
