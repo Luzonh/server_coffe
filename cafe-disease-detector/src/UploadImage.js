@@ -226,7 +226,7 @@ const ResultModal = ({ isOpen, onClose, result }) => {
               <div className="flex justify-center">
                 <div className="relative">
                   <img
-                    src={`'https://ia-coffee.web.app${result.imagePath}`}
+                    src={`https://cafe-disease-detector.onrender.com${result.imagePath}`}
                     alt="Analyzed"
                     className="rounded-lg shadow-lg"
                     style={{ 
@@ -265,6 +265,11 @@ const UploadImage = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);
+  
+  const [retryCount, setRetryCount] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState('idle'); // Añade este
+  const [uploadProgress, setUploadProgress] = useState(0);    // Añade este
+  const [analysisProgress, setAnalysisProgress] = useState(0);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -281,11 +286,16 @@ const UploadImage = ({ user }) => {
   };
 
   const handleSubmit = async () => {
-    if (!selectedFile) return;
-    setLoading(true);
-    setError(null);
+    if (!selectedFile || loading) {
+      return;
+    }
   
     try {
+      setLoading(true);
+      setError(null);
+      setCurrentStatus('starting');
+      console.log('Iniciando conexión al servidor...');
+  
       const currentUser = auth.currentUser;
       if (!currentUser) {
         throw new Error('Usuario no autenticado');
@@ -295,35 +305,68 @@ const UploadImage = ({ user }) => {
       const formData = new FormData();
       formData.append('image', selectedFile);
   
-      const response = await fetch('https://ia-coffee.web.app/detect', {
+      // URL del servidor en producción
+      const apiUrl = 'https://cafe-disease-detector.onrender.com/detect';
+      
+      setCurrentStatus('uploading');
+      setUploadProgress(0);
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
         },
         body: formData,
+        mode: 'cors',
+        credentials: 'include',
+        cache: 'no-cache'
       });
   
-      const data = await response.json();
-  
       if (!response.ok) {
-        throw new Error(data.error || 'Error al procesar la imagen');
+        const errorBody = await response.text();
+        console.error('Error respuesta servidor:', {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorBody
+        });
+        throw new Error(`Error del servidor: ${response.status}`);
       }
   
+      setCurrentStatus('analyzing');
+      setAnalysisProgress(50);
+  
+      const data = await response.json();
+      console.log('Respuesta del servidor:', data);
+      
       if (data.success) {
+        setCurrentStatus('complete');
+        setAnalysisProgress(100);
         setResult(data);
         setIsResultModalOpen(true);
       } else {
-        setError(data.error);
+        throw new Error(data.error || 'Error en el procesamiento de la imagen');
       }
+  
     } catch (err) {
-      console.error('Error:', err);
-      setError(err.message);
-      // Mostrar mensaje específico si no es una hoja de café
-      if (err.message.includes('hoja de café')) {
-        setError('Por favor, asegúrese de subir una imagen de una hoja de café.');
+      console.error('Error detallado:', err);
+      setCurrentStatus('error');
+      
+      let errorMessage = 'Error de conexión. Por favor, intente nuevamente.';
+      
+      if (err.message.includes('NetworkError') || err.message.includes('Failed to fetch')) {
+        errorMessage = 'No se puede conectar al servidor. Por favor, verifique su conexión a internet.';
+      } else if (err.message.includes('cors')) {
+        errorMessage = 'Error de acceso al servidor. Por favor, contacte al administrador.';
       }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setCurrentStatus('idle');
+        setUploadProgress(0);
+        setAnalysisProgress(0);
+      }, 2000);
     }
   };
 

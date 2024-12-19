@@ -36,7 +36,7 @@ const app = express();
 
 // Configuración CORS
 app.use(cors({
-  origin: ['https://ia-coffee.web.app', 'https://ia-coffee.firebaseapp.com'],
+  origin: ['https://ia-coffee.web.app', 'http://localhost:3001'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -44,9 +44,13 @@ app.use(cors({
   maxAge: 86400 
 }));
 
+
+app.use(cors(corsOptions));
+
 // Headers CORS adicionales
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
