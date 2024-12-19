@@ -45,7 +45,7 @@ app.use(cors({
 }));
 
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 // Headers CORS adicionales
 app.use((req, res, next) => {
